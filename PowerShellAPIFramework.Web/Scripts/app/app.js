@@ -1,0 +1,1 @@
+﻿var powerShellApp = angular.module('app', []);

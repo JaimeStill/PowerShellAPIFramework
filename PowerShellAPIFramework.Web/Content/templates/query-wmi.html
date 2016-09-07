@@ -1,0 +1,59 @@
+﻿<div>
+    <h2>Query WMI Test</h2>
+    <hr />
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="input-group">
+                <div class="input-group-addon">Computer Name</div>
+                <input ng-model="queryModel.computername" class="form-control" />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group">
+                <div class="input-group-addon">WMI Namespace</div>
+                <input ng-model="queryModel.wmiNamespace" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="input-group">
+                <div class="input-group-addon">Add Property</div>
+                <input ng-model="newProperty" class="form-control" />
+                <div class="input-group-btn">
+                    <button class="btn btn-primary" ng-click="addProperty()"><span class="glyphicon glyphicon-plus"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="queryModel.properties.length > 0">
+        <div class="col-sm-6">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="property in queryModel.properties">
+                        <td ng-bind="property"></td>
+                        <td class="text-right">
+                            <button class="btn btn-danger btn-xs" ng-click="removeProperty(property)">Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table> 
+        </div>
+    </div>
+    <h4>Query to Test</h4>
+    <div class="row">
+        <div class="col-sm-12">
+            <textarea rows="5" ng-model="queryModel.query" class="form-control"></textarea>
+        </div>
+    </div>
+    <button class="btn btn-success" ng-click="testQuery()">Test Query</button>
+    <hr />
+    <h3>Results</h3>
+    <p ng-model="queryModel.results"></p>
+</div>
