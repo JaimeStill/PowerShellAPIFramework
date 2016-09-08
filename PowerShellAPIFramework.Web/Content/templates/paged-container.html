@@ -1,0 +1,28 @@
+﻿<div>
+    <div class="row" ng-show="itemCollection.results.length > 5">
+        <div class="col-md-4">
+            <div class="input-group">
+                <div class="input-group-addon">Items Per Page</div>
+                <select ng-model="pageSize" class="form-control" ng-options="size for size in pageSizes" ng-change="updatePaging()"></select>
+            </div>
+        </div>
+        <div class="col-md-4 col-md-offset-4 text-right">
+            <h4>Total Items: <span ng-bind="itemCollection.results.length"></span></h4>
+        </div>
+    </div>
+    <ng-transclude></ng-transclude>
+    <div class="row" ng-show="itemCollection.results.length > pageSize">
+        <div class="col-xs-12">
+            <nav>
+                <ul class="pager">
+                    <li class="previous" ng-class="{disabled: currentPage === 0}" style="cursor: pointer">
+                        <a ng-click="previous()"><span>&larr;</span> Previous</a>
+                    </li>
+                    <li class="next" ng-class="{disabled: currentPage >= (numberOfPages - 1)}" style="cursor: pointer">
+                        <a ng-click="next()"><span>&rarr;</span> Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
