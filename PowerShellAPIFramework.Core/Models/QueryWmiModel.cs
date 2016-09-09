@@ -12,7 +12,6 @@ namespace PowerShellAPIFramework.Core.Models
         public string username { get; set; }
         public string password { get; set; }
         public bool isRemoteConnection { get; set; }
-        public IEnumerable<string> results { get; set; }
         public SecureString securePassword
         {
             get
