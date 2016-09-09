@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PowerShellAPIFramework.Core.Extensions
@@ -48,10 +49,14 @@ namespace PowerShellAPIFramework.Core.Extensions
                         {
                             if (ps.Streams.Error.Count > 0)
                             {
+                                var exceptions = new StringBuilder();
+
                                 foreach (var error in ps.Streams.Error)
                                 {
-                                    throw new Exception(error.Exception.GetExceptionMessageChain());
+                                    exceptions.AppendLine(error.Exception.GetExceptionMessageChain());
                                 }
+
+                                throw new Exception(exceptions.ToString());
                             }
                         }
                         else
