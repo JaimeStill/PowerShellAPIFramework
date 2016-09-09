@@ -15,7 +15,6 @@ namespace PowerShellAPIFramework.Core.Extensions
             try
             {
                 List<ResultModel> results = new List<ResultModel>();
-                var script = await ("PowerShellAPIFramework.Core.Scripts.query-wmi.ps1").GetTextFromEmbeddedResource();
                 InitialSessionState iss = InitialSessionState.CreateDefault();
                 iss.ExecutionPolicy = Microsoft.PowerShell.ExecutionPolicy.Unrestricted;
 
@@ -23,11 +22,21 @@ namespace PowerShellAPIFramework.Core.Extensions
                 {
                     rs.Open();
 
-                    Command queryWmi = new Command(script, true);
+                    var script = string.Empty;
+
+                    if (model.isRemoteConnection)
+                        script = await ("PowerShellAPIFramework.Core.Scripts.query-wmi-remote.ps1").GetTextFromEmbeddedResource();
+                    else
+                        script = await ("PowerShellAPIFramework.Core.Scripts.query-wmi.ps1").GetTextFromEmbeddedResource();
+
+                    Command queryWmi = new Command(script, true);                    
                     queryWmi.Parameters.Add("query", model.query);
                     queryWmi.Parameters.Add("properties", model.properties);
                     queryWmi.Parameters.Add("computername", model.computername);
                     queryWmi.Parameters.Add("wmiNamespace", model.wmiNamespace);
+
+                    if (model.isRemoteConnection)
+                        queryWmi.Parameters.Add("credential", new PSCredential(model.username, model.securePassword));
 
                     using (PowerShell ps = PowerShell.Create())
                     {

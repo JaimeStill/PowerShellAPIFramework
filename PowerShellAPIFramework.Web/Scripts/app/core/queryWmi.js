@@ -35,6 +35,10 @@
                     }
                 }
 
+                scope.toggle = function () {
+                    scope.model.isRemoteConnection = !scope.model.isRemoteConnection;
+                }
+
                 scope.testQuery = function () {
                     if (validate(scope.model)) {
                         scope.loading = true;
@@ -64,6 +68,18 @@
                     if (model.wmiNamespace === null || model.wmiNamespace === undefined || model.wmiNamespace === '') {
                         toastrSvc.alertWarning('You must specify the WMI Namespace', 'Invalid Query Configuration');
                         return false;
+                    }
+
+                    if (model.isRemoteConnection) {
+                        if (model.username === null || model.username === undefined || model.username === '') {
+                            toastrSvc.alertWarning('Username is required for remote connections', 'Invalid Query Configuration');
+                            return false;
+                        }
+
+                        if (model.password === null || model.password === undefined || model.password === '') {
+                            toastrSvc.alertWarning('Password is required for remote connection', 'Invalid QueryConfiguration');
+                            return false;
+                        }
                     }
 
                     return true;

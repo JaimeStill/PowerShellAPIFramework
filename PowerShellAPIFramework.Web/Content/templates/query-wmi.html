@@ -2,6 +2,31 @@
     <h2>Query WMI</h2>
     <hr />
     <div class="row">
+        <div class="col-sm-3">
+            <div class="input-group">
+                <div class="input-group-addon" ng-click="toggle()" style="cursor: pointer">Remote Connection?</div>
+                <div class="input-group-btn">
+                    <button class="btn btn-success" ng-if="model.isRemoteConnection" ng-click="toggle()"><span class="glyphicon glyphicon-ok"></span></button>
+                    <button class="btn btn-danger" ng-if="!(model.isRemoteConnection)" ng-click="toggle()"><span class="glyphicon glyphicon-remove"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="model.isRemoteConnection">
+        <div class="col-sm-6">
+            <div class="input-group">
+                <div class="input-group-addon">Username</div>
+                <input ng-model="model.username" class="form-control" />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group">
+                <div class="input-group-addon">Password</div>
+                <input ng-model="model.password" class="form-control" type="password" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-sm-6">
             <div class="input-group">
                 <div class="input-group-addon">Computer Name</div>

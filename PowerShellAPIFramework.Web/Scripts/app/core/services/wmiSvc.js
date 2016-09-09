@@ -5,7 +5,10 @@
                 query: '',
                 properties: [],
                 computername: '',
-                wmiNamespace: 'root\\cimv2'
+                wmiNamespace: 'root\\cimv2',
+                username: '',
+                password: '',
+                isRemoteConnection: false
             },
             resultsModel = {
                 results: []
