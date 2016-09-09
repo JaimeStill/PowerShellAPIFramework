@@ -1,5 +1,5 @@
 ## PowerShell API
-![powershellapi](https://cloud.githubusercontent.com/assets/14102723/18386955/be6f92e2-7667-11e6-91bc-2791a52c3f77.png)
+![powershellapi](https://cloud.githubusercontent.com/assets/14102723/18389156/8f160c78-7672-11e6-92f6-b0e41f45e8fc.png)
 
 ### External Dependencies
 * [Windows Management Framework 5.0](https://www.microsoft.com/en-us/download/details.aspx?id=50395)
