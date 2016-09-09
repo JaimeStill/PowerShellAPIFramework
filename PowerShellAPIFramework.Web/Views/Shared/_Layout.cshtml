@@ -8,15 +8,11 @@
 </head>
 <body>
     <div class="container body-content">
-        <div class="jumbotron">
-            <h1>PowerShell API Framework</h1>
-            <p class="lead">A Web API-based interface to PowerShell Scripting.</p>
-            <p><a href="https://github.com/JaimeStill" target="_blank" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-        </div>
         @RenderBody()
     </div>
 
     @Scripts.Render("~/bundles/core")
+    @Scripts.Render("~/bundles/app")
     @RenderSection("scripts", required: false)
 </body>
 </html>

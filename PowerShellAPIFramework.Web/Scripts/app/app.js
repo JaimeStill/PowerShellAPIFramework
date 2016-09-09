@@ -1,1 +1,1 @@
-﻿var powerShellApp = angular.module('app', []);
+﻿var powershellApp = angular.module('app', []);

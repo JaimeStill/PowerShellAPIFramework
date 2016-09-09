@@ -1,38 +1,34 @@
 ﻿(function () {
-    var wmiSvc = function ($http, $q) {
+    var wmiSvc = function ($http, $q, utilitySvc, toastrSvc) {
         var
             queryModel = {
                 query: '',
                 properties: [],
                 computername: '',
-                wmiNamespace: 'root\cimv2',
-                results: ''
+                wmiNamespace: 'root\\cimv2',
+                username: '',
+                password: '',
+                isRemoteConnection: false
+            },
+            resultsModel = {
+                results: []
             },
             queryWmi = function (model) {
                 var deferred = $q.defer();
-
+                
                 $http({
                     url: '/api/wmi/queryWmi',
                     method: 'POST',
                     data: model
                 }).success(function (data) {
-                    queryModel = data;
+                    resultsModel.results = data;
+                    if (resultsModel.results.length < 1) {
+                        toastrSvc.alertWarning("The provided query completed successfully, but did not return any results");
+                    }
                     deferred.resolve();
                 }).error(function (err) {
-                    if (err.ExceptionMessage) {
-                        console.error(err.ExceptionMessage);
-                        queryModel.results = err.ExceptionMessage;
-                    } else if (err.Message) {
-                        console.error(err.Message);
-                        queryModel.results = err.Message;
-                    } else if (err) {
-                        console.error(err);
-                        queryModel.results = err;
-                    } else {
-                        console.error("Unspecified error interfacing with the PowerShell API");
-                        queryModel.results = "Unspecified error interfacing with the PowerShell API";
-                    }
-
+                    console.log(err);
+                    utilitySvc.toastErrorMessage(err, "Error Querying WMI");
                     deferred.reject(err);
                 });
 
@@ -41,10 +37,11 @@
 
         return {
             queryModel: queryModel,
+            resultsModel: resultsModel,
             queryWmi: queryWmi
         };
     };
 
-    wmiSvc.$inject = ['$http', '$q'];
-    powerShellApp.factory('wmiSvc', wmiSvc);
+    wmiSvc.$inject = ['$http', '$q', 'utilitySvc', 'toastrSvc'];
+    powershellApp.factory('wmiSvc', wmiSvc);
 }());

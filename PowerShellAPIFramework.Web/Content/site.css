@@ -16,6 +16,15 @@
     white-space: normal;
 }
 
+.code-area {
+    font-size: 11px;
+    font-family: Consolas;
+}
+
 .input-group {
-    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+textarea {
+    margin-bottom: 10px;
 }

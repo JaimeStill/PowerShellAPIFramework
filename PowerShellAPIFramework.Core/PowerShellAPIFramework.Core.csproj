@@ -46,15 +46,21 @@
   <ItemGroup>
     <Compile Include="Extensions\UtilityExtensions.cs" />
     <Compile Include="Extensions\WmiExtensions.cs" />
+    <Compile Include="Models\PropertyValueModel.cs" />
     <Compile Include="Models\QueryWmiModel.cs" />
+    <Compile Include="Models\ResultModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\QueryWmi.ps1">
+    <EmbeddedResource Include="Scripts\query-wmi.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\query-wmi-remote.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
