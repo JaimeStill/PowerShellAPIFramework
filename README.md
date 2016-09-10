@@ -1,4 +1,7 @@
 ## PowerShell API
+
+Full setup / workflow details can be found in the [PowerShellAPIFramework Wiki](https://github.com/JaimeStill/PowerShellAPIFramework/wiki)
+
 ![powershellapi](https://cloud.githubusercontent.com/assets/14102723/18389156/8f160c78-7672-11e6-92f6-b0e41f45e8fc.png)
 
 ### External Dependencies
