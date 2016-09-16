@@ -10,30 +10,8 @@
                     results: []
                 };
                 scope.resultsModel = wmiSvc.resultsModel;
+                scope.propertiesModel = wmiSvc.propertiesModel;
                 scope.loading = false;
-
-                scope.addProperty = function () {
-                    if (scope.newProperty !== null && scope.newProperty !== undefined && scope.newProperty !== '') {
-                        if (scope.model.properties.indexOf(scope.newProperty) === -1) {
-                            scope.model.properties.push(scope.newProperty);
-                            scope.newProperty = '';
-                        } else {
-                            toastrSvc.alertWarning('The specified property has already been added', 'Invalid Property Value');
-                        }
-                    } else {
-                        toastrSvc.alertWarning('Property must have a value', 'Invalid Property Value');
-                    }
-                }
-
-                scope.removeProperty = function (property) {
-                    var index = scope.model.properties.indexOf(property);
-
-                    if (index > -1) {
-                        scope.model.properties.splice(index, 1);
-                    } else {
-                        toastrSvc.alertWarning('The specified property was not found in the property collection', 'Invalid Property Value');
-                    }
-                }
 
                 scope.toggle = function () {
                     scope.model.isRemoteConnection = !scope.model.isRemoteConnection;
@@ -43,6 +21,7 @@
                     if (validate(scope.model)) {
                         scope.loading = true;
                         scope.resultsModel.results = [];
+                        scope.propertiesModel.properties = [];
                         wmiSvc.queryWmi(scope.model).finally(function () {
                             scope.loading = false;
                         });
@@ -52,11 +31,6 @@
                 function validate(model) {
                     if (model.query === null || model.query === undefined || model.query === '') {
                         toastrSvc.alertWarning('Query must have a value', 'Invalid Query Configuration');
-                        return false;
-                    }
-
-                    if (model.properties === null || model.properties === undefined || model.properties.length < 1) {
-                        toastrSvc.alertWarning('You must specify at least one property', 'Invalid Query Configuration');
                         return false;
                     }
 

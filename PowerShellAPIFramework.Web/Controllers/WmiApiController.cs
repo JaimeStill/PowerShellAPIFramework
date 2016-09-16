@@ -10,7 +10,7 @@ namespace PowerShellAPIFramework.Web.Controllers
     {
         [Route("api/wmi/queryWmi")]
         [HttpPost]
-        public async Task<IEnumerable<ResultModel>> QueryWmi(QueryWmiModel model)
+        public async Task<ReturnModel> QueryWmi(QueryWmiModel model)
         {
             return await model.QueryWmi();
         }

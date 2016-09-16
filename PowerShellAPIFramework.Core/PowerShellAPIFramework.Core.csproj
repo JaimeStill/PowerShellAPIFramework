@@ -49,6 +49,7 @@
     <Compile Include="Models\PropertyValueModel.cs" />
     <Compile Include="Models\QueryWmiModel.cs" />
     <Compile Include="Models\ResultModel.cs" />
+    <Compile Include="Models\ReturnModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

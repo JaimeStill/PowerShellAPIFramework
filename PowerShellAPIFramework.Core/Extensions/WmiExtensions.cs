@@ -11,11 +11,11 @@ namespace PowerShellAPIFramework.Core.Extensions
 {
     public static class WmiExtensions
     {
-        public static async Task<IEnumerable<ResultModel>> QueryWmi(this QueryWmiModel model)
+        public static async Task<ReturnModel> QueryWmi(this QueryWmiModel model)
         {
             try
             {
-                List<ResultModel> results = new List<ResultModel>();
+                ReturnModel returnModel = new ReturnModel();
                 InitialSessionState iss = InitialSessionState.CreateDefault();
                 iss.ExecutionPolicy = Microsoft.PowerShell.ExecutionPolicy.Unrestricted;
 
@@ -32,7 +32,6 @@ namespace PowerShellAPIFramework.Core.Extensions
 
                     Command queryWmi = new Command(script, true);                    
                     queryWmi.Parameters.Add("query", model.query);
-                    queryWmi.Parameters.Add("properties", model.properties);
                     queryWmi.Parameters.Add("computername", model.computername);
                     queryWmi.Parameters.Add("wmiNamespace", model.wmiNamespace);
 
@@ -63,6 +62,11 @@ namespace PowerShellAPIFramework.Core.Extensions
                         {
                             foreach (var result in psResults)
                             {
+                                if (psResults.IndexOf(result) == 0)
+                                {
+                                    returnModel.properties = result.Properties.Select(x => x.Name).ToList();
+                                }
+
                                 var resultModel = new ResultModel
                                 {
                                     propertyValues = result.Properties.Select(x => new PropertyValueModel
@@ -72,13 +76,13 @@ namespace PowerShellAPIFramework.Core.Extensions
                                     }).AsEnumerable()
                                 };
 
-                                results.Add(resultModel);
+                                returnModel.results.Add(resultModel);
                             }
                         }
                     }
                 }
 
-                return results.AsEnumerable();
+                return returnModel;
             }
             catch (Exception ex)
             {

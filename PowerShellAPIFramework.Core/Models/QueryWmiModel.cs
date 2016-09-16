@@ -6,7 +6,6 @@ namespace PowerShellAPIFramework.Core.Models
     public class QueryWmiModel
     {
         public string query { get; set; }
-        public string[] properties { get; set; }
         public string computername { get; set; }
         public string wmiNamespace { get; set; }
         public string username { get; set; }

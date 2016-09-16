@@ -3,7 +3,6 @@
         var
             queryModel = {
                 query: '',
-                properties: [],
                 computername: '',
                 wmiNamespace: 'root\\cimv2',
                 username: '',
@@ -13,6 +12,9 @@
             resultsModel = {
                 results: []
             },
+            propertiesModel = {
+                properties: []
+            },
             queryWmi = function (model) {
                 var deferred = $q.defer();
                 
@@ -21,7 +23,8 @@
                     method: 'POST',
                     data: model
                 }).success(function (data) {
-                    resultsModel.results = data;
+                    resultsModel.results = data.results;
+                    propertiesModel.properties = data.properties;
                     if (resultsModel.results.length < 1) {
                         toastrSvc.alertWarning("The provided query completed successfully, but did not return any results");
                     }
@@ -38,6 +41,7 @@
         return {
             queryModel: queryModel,
             resultsModel: resultsModel,
+            propertiesModel: propertiesModel,
             queryWmi: queryWmi
         };
     };

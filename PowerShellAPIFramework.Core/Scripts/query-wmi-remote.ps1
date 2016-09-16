@@ -3,8 +3,6 @@ Param(
 	[Parameter()]
 	[string]$query,
 	[Parameter()]
-	[string[]]$properties,
-	[Parameter()]
 	[string]$computername,
 	[Parameter()]
 	[string]$wmiNamespace,
@@ -12,4 +10,4 @@ Param(
 	[PSCredential]$credential
 )
 $wmi = Get-WmiObject -ComputerName $computername -Namespace $wmiNamespace -Query $query -Credential $credential
-$wmi | select $properties
+$wmi | select * -excludeproperty "_*", "PSComputerName", "Scope", "Path", "Options", "ClassPath", "Properties", "SystemProperties", "Qualifiers", "Site", "Container"
